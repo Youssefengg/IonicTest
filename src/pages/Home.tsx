@@ -1,8 +1,13 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
+import TaskForm from '../components/TaskForm';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const addTask = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('task added')
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -11,12 +16,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <TaskForm onAdd={addTask}></TaskForm>
       </IonContent>
     </IonPage>
   );
