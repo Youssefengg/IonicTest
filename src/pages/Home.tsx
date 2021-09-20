@@ -1,8 +1,16 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { useState } from 'react';
+import TaskForm from '../components/TaskForm';
+import TaskList from '../components/TaskList';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const [taskList, setTaskList] = useState<any>([])
+  const addTask = (event: React.FormEvent<HTMLFormElement>, newTask: string) => {
+    event.preventDefault();
+    console.log('task added')
+    setTaskList([...taskList, newTask])
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -11,12 +19,8 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <TaskForm onAdd={(e, newTask) => addTask(e, newTask)}></TaskForm>
+        <TaskList taskList={taskList}></TaskList>
       </IonContent>
     </IonPage>
   );
