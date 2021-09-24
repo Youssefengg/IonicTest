@@ -10,7 +10,13 @@ interface TaskFormProps {
 const TaskForm: React.FC<TaskFormProps> = ({ onAdd }) => {
     const [newTask, setNewTask] = useState<any>('')
     return (
-        <form onSubmit={(e) => onAdd(e, newTask)}>
+        <form onSubmit={
+            (e) => {
+                onAdd(e, newTask)
+                setNewTask('')
+            }
+
+        }>
             <IonItem>
                 <IonLabel position="floating">task :</IonLabel>
                 <IonInput value={newTask} onIonChange={e => {
