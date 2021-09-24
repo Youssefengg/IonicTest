@@ -11,6 +11,16 @@ const Home: React.FC = () => {
     console.log('task added')
     setTaskList([...taskList, newTask])
   }
+  const deleteTak = (taskname: any) => {
+    console.log('onclick fired')
+    console.log(taskname)
+
+    let index = taskList.findIndex((index: any) => index === taskname)
+    console.log(index)
+    taskList.splice(index, 1)
+    setTaskList([...taskList])
+    console.log(taskList)
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -20,7 +30,7 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <TaskForm onAdd={(e, newTask) => addTask(e, newTask)}></TaskForm>
-        <TaskList taskList={taskList}></TaskList>
+        <TaskList onDelete={(taskName) => deleteTak(taskName)} taskList={taskList}></TaskList>
       </IonContent>
     </IonPage>
   );
